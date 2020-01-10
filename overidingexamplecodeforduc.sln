@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "overidingexamplecodeforduc", "overidingexamplecodeforduc\overidingexamplecodeforduc.csproj", "{DBD7A017-90F5-4986-8F42-6E3F602D3999}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBD7A017-90F5-4986-8F42-6E3F602D3999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD7A017-90F5-4986-8F42-6E3F602D3999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD7A017-90F5-4986-8F42-6E3F602D3999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD7A017-90F5-4986-8F42-6E3F602D3999}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52926A40-031E-4F6A-A51F-F262A7002D7D}
+	EndGlobalSection
+EndGlobal
