@@ -1,0 +1,116 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace manageStudentandLecturertodo
+{
+    class Add
+    {
+        private string name;
+        private string id;
+        private string dateofbirth;
+        private string email;
+        private string address;
+        private string batch;
+
+        public string ID { get => id; set => id = value; }
+        public string Name { get => name; set => name = value; }
+        public string Dateofbirth { get => dateofbirth; set => dateofbirth = value; }
+        public string Email { get => email; set => email = value; }
+        public string Address { get => address; set => address = value; }
+        public string Batch { get => batch; set => batch = value; }
+
+
+
+
+
+        public void add1()
+        {
+            do
+            {
+                Console.WriteLine("Enter id:");
+                ID = Console.ReadLine();
+                if (ID.Length == 0 || (!ID.Contains("GT") && !ID.Contains("GC")))
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+            }
+            while (ID.Length == 0 || (!ID.Contains("GT") && !ID.Contains("GC")));
+
+            //Enter id.
+            do
+            {
+                Console.WriteLine("Enter Name:");
+                Name = Console.ReadLine();
+                if (Name.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+            }
+            while (Name.Length == 0);
+            //Enter name.
+
+            do
+            {
+                Console.WriteLine("Enter date of birth: (DD//MM/YYYY)");
+                Dateofbirth = Console.ReadLine();
+                if (Dateofbirth.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+            }
+            while (Dateofbirth.Length == 0);
+            //Enter date of birth.
+            do
+            {
+                Console.WriteLine("Enter email address:");
+                Email = Console.ReadLine();
+                if (Email.Length == 0 || !Email.Contains("@"))
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+
+
+            } while (Email.Length == 0 || !Email.Contains("@"));
+            //Enter Email.
+
+            do
+            {
+                Console.WriteLine("Enter address:(email must contain @)");
+                Address = Console.ReadLine();
+                if (Address.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+
+            } while (Email.Length == 0);
+            //Enter adrress.
+
+            do
+            {
+                Console.WriteLine("Enter batch:");
+                Batch = Console.ReadLine();
+                if (Address.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+
+            } while (Address.Length == 0);
+            //Enter batch.
+
+
+
+        }
+        
+        public void show()
+        {
+            Console.WriteLine("ID:{0}\n\n\nName:{1}", id, name);
+        }
+      
+
+
+    }
+
+}
