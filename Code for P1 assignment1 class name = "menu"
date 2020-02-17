@@ -1,0 +1,193 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace manageStudentandLecturertodo
+{
+    class menu : Add
+    {
+        IList<Add> student = new List<Add>();
+        // List<Add> search = new List<Add>();
+        public int searchx;
+        int n;
+        
+       
+        public void Menu()
+        {
+            bool chooseval;
+
+            do
+            {
+                int choose;
+
+                
+                
+
+                    Console.WriteLine("Menu:");
+                    Console.WriteLine("1.Manage student.");
+                    Console.WriteLine("2.Manage lecturer.");
+                    Console.WriteLine("3.Exit.");
+                    //this is main menu.
+                
+                choose = int.Parse(Console.ReadLine());
+             
+
+
+
+                switch (choose)
+                    {
+                        case 1:
+                        do
+                        {
+                            Console.WriteLine("This is submenu 1.");
+                            Console.WriteLine("1.Add.");
+                            Console.WriteLine("2.Edit with id.");
+                            Console.WriteLine("3.Remove with id.");
+                            Console.WriteLine("4.View all list.");
+                            Console.WriteLine("5.Search element in list.");
+                            Console.WriteLine("6.Back to main menu.");
+                            choose = int.Parse(Console.ReadLine());
+                            //this is sub menu 1.
+
+
+
+
+
+                            if (choose == 1)
+                            {
+                                
+
+
+                                do
+                                {
+                                       Console.WriteLine("Enter number of student.");
+                                       n = Convert.ToInt32(Console.ReadLine());
+                                    if(n <= 0)
+                                    {
+                                        Console.WriteLine("number of student must than zero.");
+                                        Console.Write("Enter against!!!");
+                                    }
+                                    else break;
+
+                                } while (n > 0);
+                                for(int i = 0; i < n; i++)
+                                {
+                                    Console.WriteLine("Input infor of student number {0}", (i + 1));
+                                    Add stu = new Add();
+                                    stu.add1();
+                                    student.Add(stu);
+
+                                }
+                                //input information of student.
+                                //dd.add();
+                               
+
+
+
+
+                            }
+                            if (choose == 4)
+                            {
+
+
+                                for (int i = 0; i < n; i++)
+                                {
+                                    Console.WriteLine("Information of student number {0}", (i + 1));
+                                    student[i].show();
+                                   // Console.WriteLine(student.TrueForAll(testsearch));
+
+                                }
+                                //accessing list.
+
+
+                            }
+                            if (choose == 5)
+                            {
+                               /* //List<int> studentidsearch = new List<int>();
+
+                                Console.WriteLine("Enter id to search.");
+                                int x = searchx;
+                                x = Convert.ToInt32(Console.ReadLine());
+                                Add search = student.Where(item => item.add1())
+                                
+                                
+                                //Add stu = new Add();
+                                //stu.search();
+                                //student.Add(stu);
+                                searchx =student.Contains(searchx);
+                               
+                                //Console.WriteLine(result);
+
+
+
+
+
+
+
+                                /*for (int i = 0; i < n; i++)
+                                {
+                                       if (student.FindLast(search1))
+                                       {
+                                            Add stu = new Add();
+                                            stu.show();
+                                       }
+                                       else
+                                       {
+                                            Console.WriteLine("Not found!!!");
+                                       }
+
+                                }
+                                */
+
+
+
+
+
+                            }
+                       
+
+                        } while (choose != 6);
+                           
+                     
+                        
+                            break;
+                        case 2:
+                            Console.WriteLine("This is submenu 2.");
+                            Console.WriteLine("1.Add.");
+                            Console.WriteLine("2.Edit with id.");
+                            Console.WriteLine("3.Remove with id.");
+                            Console.WriteLine("4.View all list.");
+                            Console.WriteLine("5.Back to main menu.");
+                            Console.ReadLine();
+
+                        break;
+                        case 3:
+                            Environment.Exit(0);
+
+                            break;
+                        default:
+                          
+                                Console.WriteLine("You are stupid.Let try against!!!");
+                                
+
+                            
+                            break;
+                    }
+
+
+                chooseval = false;
+
+                    
+                
+            } while (!chooseval);
+            //using switch statement to show submenu.
+          
+
+        }
+        
+
+
+    }
+}
