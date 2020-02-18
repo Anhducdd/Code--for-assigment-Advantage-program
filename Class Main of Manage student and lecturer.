@@ -1,0 +1,10 @@
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            menu callmenu = new menu();
+            callmenu.Menu();
+            Console.ReadLine();
+
+        }
+    }
