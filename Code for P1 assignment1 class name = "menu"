@@ -105,47 +105,19 @@ namespace manageStudentandLecturertodo
                             }
                             if (choose == 5)
                             {
-                               /* //List<int> studentidsearch = new List<int>();
-
-                                Console.WriteLine("Enter id to search.");
-                                int x = searchx;
-                                x = Convert.ToInt32(Console.ReadLine());
-                                Add search = student.Where(item => item.add1())
-                                
-                                
-                                //Add stu = new Add();
-                                //stu.search();
-                                //student.Add(stu);
-                                searchx =student.Contains(searchx);
-                               
-                                //Console.WriteLine(result);
-
-
-
-
-
-
-
-                                /*for (int i = 0; i < n; i++)
+                                Console.WriteLine("Enter id you want to search.");
+                                string usesearch = Console.ReadLine();
+                                for(int i = 0; i < n; i++)
                                 {
-                                       if (student.FindLast(search1))
-                                       {
-                                            Add stu = new Add();
-                                            stu.show();
-                                       }
-                                       else
-                                       {
-                                            Console.WriteLine("Not found!!!");
-                                       }
-
+                                    student[i].search(usesearch);
                                 }
-                                */
 
 
 
 
 
                             }
+                            //searching function.
                        
 
                         } while (choose != 6);
