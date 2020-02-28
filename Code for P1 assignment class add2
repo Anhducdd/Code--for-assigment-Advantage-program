@@ -1,19 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Text.RegularExpressions;
 namespace manageStudentandLecturertodo
 {
     class Add
     {
+
+        public List<Add> student = new List<Add>();
+        public List<Add> lecturer = new List<Add>();
+        public int n;
+        public int n1;
+        public int checksearchinputtime;
+        public int checksearchinputtime1;
+
+
         private string name;
         private string id;
         private string dateofbirth;
         private string email;
         private string address;
         private string batch;
+        private string department;
+        public string inputremove;
 
         public string ID { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
@@ -22,26 +34,32 @@ namespace manageStudentandLecturertodo
         public string Address { get => address; set => address = value; }
         public string Batch { get => batch; set => batch = value; }
 
-    
+        public string Department { get => department; set => department = value; }
+      
 
+         public void  add1()
+        {
+            Regex r = new Regex(@"^(GC|GT)\d{5}");
 
-
-
-
-
-         public void add1()
-         {
-
-             do
+            do
              {
-                 Console.WriteLine("Enter id:");
+                 Console.WriteLine("Enter id(The student ID of the form like GTxxxxx or GCxxxxx (x: is a digit)):");
                  ID = Console.ReadLine();
-                 if (ID.Length == 0 || (!ID.Contains("GT") && !ID.Contains("GC")))
+               
+                bool match = r.IsMatch(ID);
+          
+                 if (!r.IsMatch(ID))
                  {
                      Console.WriteLine("Please try again!!!");
+                    
                  }
+                if(ID.Length != 7)
+                {
+                    Console.WriteLine("Id must include 8 characters.");
+
+                }
              }
-             while (ID.Length == 0 || (!ID.Contains("GT") && !ID.Contains("GC")));
+             while (ID.Length == 0 || !r.IsMatch(ID) || ID.Length !=7 );
 
              //Enter id.
              do
@@ -66,19 +84,23 @@ namespace manageStudentandLecturertodo
                  }
              }
              while (Dateofbirth.Length == 0);
-             //Enter date of birth.
-             do
-             {
-                 Console.WriteLine("Enter email address:(email must contain @)");
-                 Email = Console.ReadLine();
-                 if (Email.Length == 0 || !Email.Contains("@"))
-                 {
-                     Console.WriteLine("Please try again!!!");
-                 }
+            //Enter date of birth.
 
+            do
+            {
+                Console.WriteLine("Enter email address:(email must contain @)");
+                Email = Console.ReadLine();
+                if (IsvalidEmail(Email))
+                {
 
-             } while (Email.Length == 0 || !Email.Contains("@"));
-             //Enter Email.
+                }
+                else
+                {
+                    Console.WriteLine("Email is not valid. Please try again.");
+                }
+
+            } while(!IsvalidEmail(Email));
+            //Enter Email.
 
              do
              {
@@ -89,7 +111,7 @@ namespace manageStudentandLecturertodo
                      Console.WriteLine("Please try again!!!");
                  }
 
-             } while (Email.Length == 0);
+             } while (Address.Length == 0);
              //Enter adrress.
 
              do
@@ -102,33 +124,226 @@ namespace manageStudentandLecturertodo
                  }
 
              } while (Address.Length == 0);
-             //Enter batch.
+            //Enter batch.
 
 
 
-         }
-
-
-         public void show()
-         {
-            Console.WriteLine("--- ID:"+"\t\t"+"Name:"+ "\t\t"+"Dateofbirth"+"\t\t\t"+"Email"+"\t\t\t"+"Address"+"\t\t"+"Batch"+"---");
-            Console.WriteLine("--"+id+"\t"+name+"\t"+dateofbirth+"\t\t"+email+"\t\t"+address+"\t\t"+batch+"---");
-          
-         }
-         //method to show element in list.
-        public void search(string usesearch)
-        {
-           //check;
-            if(usesearch.Equals(id))
-            {
-                Console.WriteLine("--- ID:" + "\t\t" + "Name:" + "\t\t" + "Dateofbirth" + "\t\t\t" + "Email" + "\t\t\t" + "Address" + "\t\t" + "Batch" + "---");
-                Console.WriteLine("--" + id + "\t" + name + "\t" + dateofbirth + "\t\t" + email + "\t\t" + address + "\t\t" + batch + "---");
-            }
-           
 
         }
-        //method to search element in list.
+
+        public void add2()
+        {
+            Regex r = new Regex(@"^(GC|GT)\d{5}");
+            do
+            {
+                Console.WriteLine("Enter id(The lecturer ID of the form like GTxxxxx or GCxxxxx (x: is a digit)):");
+                ID = Console.ReadLine();
+                bool match = r.IsMatch(ID);
+
+                if (!r.IsMatch(ID))
+                {
+                    Console.WriteLine("Please try again!!!");
+
+                }
+                if (ID.Length != 7)
+                {
+                    Console.WriteLine("Id must include 8 characters.");
+
+                }
+            }
+            while (ID.Length == 0 ||!r.IsMatch(ID) || ID.Length !=7);
+
+            //Enter id.
+            do
+            {
+                Console.WriteLine("Enter Name:");
+                Name = Console.ReadLine();
+                if (Name.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+            }
+            while (Name.Length == 0);
+            //Enter name.
+
+            do
+            {
+                Console.WriteLine("Enter date of birth: (DD//MM/YYYY)");
+                Dateofbirth = Console.ReadLine();
+                if (Dateofbirth.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+            }
+            while (Dateofbirth.Length == 0);
+            //Enter date of birth.
+            do
+            {
+                Console.WriteLine("Enter email address:(email must contain @)");
+                Email = Console.ReadLine();
+                if (Email.Length == 0 || !Email.Contains("@"))
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+
+
+            } while (Email.Length == 0 || !Email.Contains("@"));
+            //Enter Email.
+
+            do
+            {
+                Console.WriteLine("Enter address:");
+                Address = Console.ReadLine();
+                if (Address.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+
+            } while (Email.Length == 0);
+            //Enter adrress.
+
+            do
+            {
+                Console.WriteLine("Enter department:");
+                Department = Console.ReadLine();
+                if (Address.Length == 0)
+                {
+                    Console.WriteLine("Please try again!!!");
+                }
+
+            } while (Address.Length == 0);
+            //Enter batch.
+
+
+
+
+        }
+
+
+
+        public void show()
+         {
+            string stringfomat = string.Format("{0,15},{1,15},{2,15},{3,15},{4,15},{5,15}", "ID||", "Name||", "Dateofbirth||", "Email||", "Address||", "Batch||");
+            string stringfomat1 = string.Format("{0,15},{1,15},{2,15},{3,15},{4,15},{5,15}", id, name, dateofbirth, email, address, batch);
+            Console.WriteLine(stringfomat);
+            Console.WriteLine(stringfomat1);
+                //Console.WriteLine("---" + id + "\t" + name + "\t\t" + dateofbirth + "\t\t" + email + "\t" + address + "\t\t" + batch + "---");
+            
+        
+          
+         }
+        public void show2()
+        {
+            string stringfomat = string.Format("{0,15},{1,15},{2,15},{3,15},{4,15},{5,15}", "ID||", "Name||", "Dateofbirth||", "Email||", "Address||", "Department||");
+            string stringfomat1 = string.Format("{0,15},{1,15},{2,15},{3,15},{4,15},{5,15}", id, name, dateofbirth, email, address, department);
+            Console.WriteLine(stringfomat);
+            Console.WriteLine(stringfomat1);
+            //Console.WriteLine("---" + id + "\t" + name + "\t\t" + dateofbirth + "\t\t" + email + "\t" + address + "\t\t" + batch + "---");
+
+
+
+        }
+        public  bool search(string usesearch)
+        {
+         
+            if (usesearch.Equals(name))
+            {
+
+                Console.WriteLine("--- ID:" + "\t||" + "Name:" + "\t\t||" + "Dateofbirth" + "\t\t||" + "Email" + "\t\t\t||" + "Address" + "\t||" + "Batch" + "---");
+                Console.WriteLine("---" + id + "\t" + name + "\t\t" + dateofbirth + "\t\t" + email + "\t" + address + "\t\t" + batch + "---");
+
+
+            }
+            return (usesearch.Equals(name));
+
+
+        }
+        public bool search2(string usesearch)
+        {
+
+            if (usesearch.Equals(name))
+            {
+
+
+                string stringfomat = string.Format("{0,15},{1,15},{2,15},{3,15},{4,15},{5,15}", "ID||", "Name||", "Dateofbirth||", "Email||", "Address||", "Department||");
+                string stringfomat1 = string.Format("{0,15},{1,15},{2,15},{3,15},{4,15},{5,15}", id, name, dateofbirth, email, address, department);
+                Console.WriteLine(stringfomat);
+                Console.WriteLine(stringfomat1);
+
+            }
+            return (usesearch.Equals(name));
+
+
+        }
+        public bool update(string inputupdate)
+      {
+            if (inputupdate.Equals(id))
+            {
+                Console.WriteLine("There are old information.");
+                Console.WriteLine("--- ID:" + "\t||" + "Name:" + "\t\t||" + "Dateofbirth" + "\t\t||" + "Email" + "\t\t\t||" + "Address" + "\t||" + "Batch" + "---");
+                Console.WriteLine("---" + id + "\t" + name + "\t\t" + dateofbirth + "\t\t" + email + "\t" + address + "\t\t" + batch + "---");
+                Console.WriteLine("Enter new information to update.");
+            }
+            return (inputupdate.Equals(id));
+      }
+        public bool update2(string inputupdate)
+        {
+            if (inputupdate.Equals(id))
+            {
+                Console.WriteLine("There are old information.");
+                Console.WriteLine("--- ID:" + "\t||" + "Name:" + "\t\t||" + "Dateofbirth" + "\t\t||" + "Email" + "\t\t\t||" + "Address" + "\t||" + "Department" + "---");
+                Console.WriteLine("---" + id + "\t" + name + "\t\t" + dateofbirth + "\t\t" + email + "\t" + address + "\t\t" + department + "---");
+                Console.WriteLine("Enter new information to update.");
+            }
+            return (inputupdate.Equals(id));
+        }
+
+        public  bool checkremove(string input)
+        {
+            
+
+
+            return (input.Equals(id));
+            
+        }
+        public void remove()
+        {
+            for(int i = 0; i < n; i++)
+            {
+                student.RemoveAt(i);
+
+            }
+        }
+
+        private static bool IsvalidEmail(string Email)
+        {
+            try
+            {
+                MailAddress mail = new MailAddress(Email);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+
+        }
+     
+
+
+
+
+
+
 
 
     }
+    
+   
+
 }
+
+
+    
+
+
