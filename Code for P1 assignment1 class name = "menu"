@@ -3,72 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace manageStudentandLecturertodo
 {
     class menu : Add
     {
-        IList<Add> student = new List<Add>();
-        // List<Add> search = new List<Add>();
-        public int searchx;
-        int n;
-        
+        bool chooseval;
+        int choose, choose1;
        
         public void Menu()
         {
-            bool chooseval;
+       
+
+
 
             do
             {
-                int choose;
-
-                
-                
-
                     Console.WriteLine("Menu:");
                     Console.WriteLine("1.Manage student.");
                     Console.WriteLine("2.Manage lecturer.");
                     Console.WriteLine("3.Exit.");
                     //this is main menu.
                 
-                choose = int.Parse(Console.ReadLine());
-             
-
-
-
-                switch (choose)
+                    choose = int.Parse(Console.ReadLine());
+                    Console.Clear();
+                    switch (choose)
                     {
                         case 1:
                         do
                         {
                             Console.WriteLine("This is submenu 1.");
-                            Console.WriteLine("1.Add.");
-                            Console.WriteLine("2.Edit with id.");
-                            Console.WriteLine("3.Remove with id.");
-                            Console.WriteLine("4.View all list.");
-                            Console.WriteLine("5.Search element in list.");
+                            Console.WriteLine("1.Add new student.");
+                            Console.WriteLine("2.View all students.");
+                            Console.WriteLine("3.Search students.");
+                            Console.WriteLine("4.Delete students.");
+                            Console.WriteLine("5.Update student.");
                             Console.WriteLine("6.Back to main menu.");
                             choose = int.Parse(Console.ReadLine());
                             //this is sub menu 1.
-
-
-
-
-
                             if (choose == 1)
                             {
-                                
-
-
                                 do
                                 {
-                                       Console.WriteLine("Enter number of student.");
-                                       n = Convert.ToInt32(Console.ReadLine());
+                                    Console.WriteLine("Enter number of student.");
+                                    n = Convert.ToInt32(Console.ReadLine());
+                         
+                                   
                                     if(n <= 0)
                                     {
                                         Console.WriteLine("number of student must than zero.");
                                         Console.Write("Enter against!!!");
                                     }
+                                    
                                     else break;
 
                                 } while (n > 0);
@@ -81,44 +68,100 @@ namespace manageStudentandLecturertodo
 
                                 }
                                 //input information of student.
-                                //dd.add();
-                               
-
-
-
-
                             }
-                            if (choose == 4)
+                            if(choose == 2)
                             {
-
-
-                                for (int i = 0; i < n; i++)
+                                 for (int i = 0; i < student.Count; i++)
                                 {
                                     Console.WriteLine("Information of student number {0}", (i + 1));
                                     student[i].show();
-                                   // Console.WriteLine(student.TrueForAll(testsearch));
+
 
                                 }
-                                //accessing list.
+                                //Accessing list.
 
 
                             }
+                            if (choose == 3)
+                            {
+
+                                string useesearch;
+                                do
+                                {
+                                    Console.WriteLine("Enter name of student you want to search.");
+                                    useesearch = Console.ReadLine();
+                                    for (int i = 0; i < n; i++)
+                                    {
+
+                                        if (student[i].search(useesearch) == true)
+                                        {
+                                            checksearchinputtime++;
+                                        }            
+                                    }
+                                    if (checksearchinputtime == 0)
+                                    {
+                                        Console.WriteLine("Cannot found please try again.");
+
+                                    }
+                                } while (checksearchinputtime == 0);
+                            }
+                            //Searching element in list.
+                            if (choose == 4)
+                            {
+
+                                do
+                                {
+                                    Console.WriteLine("Enter id you want to remove.");
+                                    string rm = Console.ReadLine();
+                                    for (int i = 0; i < student.Count; i++)
+                                    {
+                                        if (student[i].checkremove(rm) == true)
+                                        {
+                                            student.RemoveAt(i);
+                                           /* List<Add> thirdList = new List<Add>(student);
+                                            thirdList.RemoveAt(0); */
+                                            checksearchinputtime++;
+                                            Console.WriteLine("Delete successfull.");
+                                            break;
+                                        }
+                                    }
+                                    if (checksearchinputtime == 0)
+                                    {
+                                        Console.WriteLine("Cannot found please try again.");
+                                    }
+
+                                } while (checksearchinputtime == 0);
+                            }
+                            //Removing element in list.
                             if (choose == 5)
                             {
-                                Console.WriteLine("Enter id you want to search.");
-                                string usesearch = Console.ReadLine();
-                                for(int i = 0; i < n; i++)
+                                do
                                 {
-                                    student[i].search(usesearch);
-                                }
 
 
+                                    Console.WriteLine("Enter id of student you want to edit.");
+                                    string inputedit = Console.ReadLine();
+                                    for (int i = 0; i < n; i++)
+                                    {
+                                        if (student[i].update(inputedit) == true)
+                                        {
+                                            List<Add> secondList = new List<Add>(student);
 
+                                            secondList[i].add1();
+                                            Console.WriteLine("Update successfull.");
+                                            checksearchinputtime++;
+                                        }
 
-
+                                    }
+                                    if (checksearchinputtime == 0)
+                                    {
+                                        Console.WriteLine("Cannot found ID, please try again.");
+                                    }
+                                } while (checksearchinputtime == 0);
                             }
-                            //searching function.
-                       
+                            //Updating element in list.
+
+
 
                         } while (choose != 6);
                            
@@ -126,22 +169,145 @@ namespace manageStudentandLecturertodo
                         
                             break;
                         case 2:
+                        do
+                        {
                             Console.WriteLine("This is submenu 2.");
-                            Console.WriteLine("1.Add.");
-                            Console.WriteLine("2.Edit with id.");
-                            Console.WriteLine("3.Remove with id.");
-                            Console.WriteLine("4.View all list.");
-                            Console.WriteLine("5.Back to main menu.");
-                            Console.ReadLine();
+                            Console.WriteLine("1.Add new lecturer.");
+                            Console.WriteLine("2.View all lecturers.");
+                            Console.WriteLine("3.Search lecturers.");
+                            Console.WriteLine("4.Delete lecturers.");
+                            Console.WriteLine("5.Update lecturer.");
+                            Console.WriteLine("6.Back to main menu.");
+                            choose1 = int.Parse(Console.ReadLine());
+                            //Submenu 2.
+                            if (choose1 == 1)
+                            {
+                                do
+                                {
+                                    Console.WriteLine("Enter number of lecturer.");
+                                    n1 = Convert.ToInt32(Console.ReadLine());
+                                    if (n1 <= 0)
+                                    {
+                                        Console.WriteLine("Number of student must than zero.");
+                                        Console.Write("Enter against!!!");
+                                    }
 
+                                    else break;
+
+                                } while (n1 > 0);
+                                for (int i = 0; i < n1; i++)
+                                {
+                                    Console.WriteLine("Input infor of lecturer number {0}", (i + 1));
+                                    Add lect = new Add();
+                                    lect.add2();
+                                    lecturer.Add(lect);
+
+                                }                               
+                            }
+                            //input information of lecturer.
+                            if (choose1 == 2)
+                            {
+                               for(int i = 0; i < lecturer.Count; i++)
+                                {
+                                    Console.WriteLine("Information of student lecturer {0}", (i + 1));
+                                    lecturer[i].show2();
+                                }
+
+                            }
+                            //Accessing list.
+
+                            if (choose1 == 3)
+                            {
+
+                                string useesearch;
+                                do
+                                {
+                                    Console.WriteLine("Enter name of lecturer you want to search.");
+                                    useesearch = Console.ReadLine();
+                                    for (int i = 0; i < n1; i++)
+                                    {
+
+                                        if (lecturer[i].search(useesearch) == true)
+                                        {
+                                            checksearchinputtime1++;
+                                        }
+                                    }
+                                    if (checksearchinputtime1 == 0)
+                                    {
+                                        Console.WriteLine("Cannot found please try again.");
+
+                                    }
+                                } while (checksearchinputtime1 == 0);
+                            }
+                            //Searching element in list.
+                            if (choose1 == 4)
+                            {
+
+                                do
+                                {
+                                    Console.WriteLine("Enter id you want to remove.");
+                                    string rm = Console.ReadLine();
+                                    
+                                    for (int i = 0; i < lecturer.Count; i++)
+                                    {
+                                        if (lecturer[i].checkremove(rm) == true)
+                                        {
+                                            lecturer.RemoveAt(i);
+                                           /* List<Add> thirdList = new List<Add>(lecturer);
+                                            thirdList.RemoveAt(0);*/
+                                            checksearchinputtime1++;
+                                            Console.WriteLine("Delete successfull.");
+                                            break;
+                                        }
+                                    }
+                                    if (checksearchinputtime1 == 0)
+                                    {
+                                        Console.WriteLine("Cannot found please try again.");
+                                    }
+
+                                } while (checksearchinputtime1 == 0);
+                            }
+                            //Removing element in list.
+                            if (choose1 == 5)
+                            {
+                                do
+                                {
+
+
+                                    Console.WriteLine("Enter id of lecturer you want to edit.");
+                                    string inputedit1 = Console.ReadLine();
+                                    for (int i = 0; i < n1; i++)
+                                    {
+                                        if (lecturer[i].update2(inputedit1) == true)
+                                        {
+                                            List<Add> secondList1 = new List<Add>(lecturer);
+
+                                            secondList1[i].add2();
+                                            Console.WriteLine("Update successfull.");
+                                            checksearchinputtime1++;
+                                        }
+
+                                    }
+                                    if (checksearchinputtime1 == 0)
+                                    {
+                                        Console.WriteLine("Cannot found ID, please try again.");
+                                    }
+                                } while (checksearchinputtime1 == 0);
+                            }
+                            //Updating element in list.
+
+
+                        } while (choose1 != 6);
                         break;
-                        case 3:
+
+
+                    case 3:
                             Environment.Exit(0);
 
                             break;
                         default:
                           
-                                Console.WriteLine("You are stupid.Let try against!!!");
+                                Console.WriteLine("Let try against!!!");
                                 
 
                             
@@ -158,7 +324,10 @@ namespace manageStudentandLecturertodo
           
 
         }
-        
+     
+
+
+
 
 
     }
